@@ -1,0 +1,6 @@
+@agenda_telefonica_back_HostAddress = http://localhost:5189
+
+GET {{agenda_telefonica_back_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
