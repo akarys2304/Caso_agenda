@@ -13,7 +13,7 @@ export class Inicial {
   constructor(private router: Router) {}
 
   mudarDeTela(){
-    this.router.navigate(['/contatos.html'])
+    this.router.navigate(['/contatos'])
   }
 
 }
