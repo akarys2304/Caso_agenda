@@ -1,0 +1,9 @@
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.csproj.AssemblyReference.cache
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.AssemblyInfoInputs.cache
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.AssemblyInfo.cs
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.csproj.CoreCompileInputs.cache
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\AlineManhães\Documents\Caso_agenda\agenda_telefonica_back\agenda_telefonica_back\obj\Debug\net10.0\agenda_telefonica_back.sourcelink.json
