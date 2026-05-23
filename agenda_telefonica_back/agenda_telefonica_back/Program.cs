@@ -11,6 +11,16 @@ using agenda_telefonica_back.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//para o erro de CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+        .AllowAnyHeader().AllowAnyMethod();
+    });
+});
+
 // Configuração de Logging
 builder.Logging.AddConsole();
 
@@ -45,6 +55,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//para o erro de CORS
+app.UseCors("AllowAll");
 
 app.UseAuthorization();
 

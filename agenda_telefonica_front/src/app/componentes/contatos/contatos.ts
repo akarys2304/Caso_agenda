@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Contato, ServiceContatos } from '../../service-contatos';
 
@@ -7,29 +7,30 @@ import { Contato, ServiceContatos } from '../../service-contatos';
   standalone: false,
   templateUrl: './contatos.html',
   styleUrl: './contatos.scss',
-})
+}as any)
 export class Contatos implements OnInit{
-  constructor(private router: Router, private service: ServiceContatos) {}
-  
+  constructor(private router: Router, private service: ServiceContatos, private cdRef: ChangeDetectorRef ) {}
   ngOnInit(): void {
     this.carregarContatos()
+    console.log("Passou aqui no ngOnInit")
   }
 
-  contatos: Contato[] = []
+  // contatos: Contato[] = []
+  contatos: any;
   zeroContatos: boolean = false
   carregarContatos() {
-    this.service.obterContatos<any[]>().subscribe({
-      next: (resposta) => {
-        this.contatos = resposta
+    this.service.obterContatos().subscribe({
+      next: (resposta: any) => {
+        // setTimeout(() => {
+          this.contatos = resposta; 
+          this.zeroContatos = this.contatos.length === 0;
+          this.cdRef.detectChanges();
+        // });
       },
       error: (erro) => {
         console.error('Erro ao buscar dados:', erro)
       }
     });
-    if(this.contatos.length == 0){
-        //this.zeroContatos = true
-        //lembrar de descomentar
-    }
   }
 
   //Conjunto temporário

@@ -12,16 +12,17 @@ export interface Contato {
   providedIn: 'root',
 })
 export class ServiceContatos {
-  private apiUrl = 'http://localhost:8080/api/contatos';
+  private readonly apiUrl = 'http://localhost:5189/api/contatos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private readonly http: HttpClient) { }
 
   // Método que realiza o GET
-  obterContatos<T>(): Observable<T> {
-    return this.http.get<T>(this.apiUrl);
+  obterContatos() {
+    return this.http.get<any>(this.apiUrl);
   }
 
-  apagarContato<T>(id: number): Observable<T> {
-    return this.http.delete<T>(`${this.apiUrl}/${id}`);
+  //método DELETE
+  apagarContato(id: number){
+     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
