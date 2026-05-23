@@ -1,1 +1,35 @@
-<p>contatos works!</p>
+<body class="body">
+    <h1 class="titulo-centralizado">
+        Sua lista de contatos:
+    </h1>
+    <div class="agenda-container">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dados">
+                    <td>{{ item.nome }}</td>
+                    <td>{{ item.telefone }}</td>
+                    <td>
+                        <div class="acoes-container">
+                            <button class="acoes-button" (click)="editarContato(item.id)">Editar</button>
+                            <button class="acoes-button" (click)="excluirContato(item.id)">Excluir</button>
+                            <button class="acoes-button" (click)="enviarWhatsApp(item.telefone)">WhatsApp</button>
+                        </div>
+                    </td>
+                </tr>
+                <td *ngIf="zeroContatos" colspan="3" class="titulo-centralizado">
+                    Não há contatos salvos para exibir
+                </td>
+            </tbody>
+        </table>
+        
+
+        <button class="adicionar-contato-button" (click)="cadastrarContato()">Adicionar contato</button>
+    </div>
+</body>
