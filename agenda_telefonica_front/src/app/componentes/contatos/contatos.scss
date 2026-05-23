@@ -1,0 +1,76 @@
+.body {
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+}
+
+.adicionar-contato-button {
+    background-color: rgb(220, 235, 245);
+    text-align: center;
+    display: block;
+    margin: 0 20px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.acoes-button {
+    background-color: rgb(242, 226, 243);
+    text-align: center;
+    display: block;
+    padding: 3px 3px;
+    font-size: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.agenda-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    padding-bottom: 70px;
+    background-color: white;
+    border-radius: 15px;
+    justify-content: center;
+    display: flex;
+    align-items: flex-start; /* Alinha o topo da tabela e o topo do botão na mesma reta */
+    gap: 20px;               /* Dá um espaçamento horizontal entre a tabela e o botão */
+    width: 100%;
+}
+
+.acoes-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo-centralizado {
+    text-align: center;
+    padding:  0px 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

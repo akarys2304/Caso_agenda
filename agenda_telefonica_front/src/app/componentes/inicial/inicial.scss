@@ -1,5 +1,8 @@
 .titulo-centralizado {
     text-align: center;
+    padding:  0px 25px;
+    padding-bottom: 40px;
+
 }
 
 .entrar-button {
@@ -11,4 +14,22 @@
     font-size: 15px;
     border-radius: 15px;
     cursor: pointer;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    padding-bottom: 70px;
+    background-color: lightblue;
+    border-radius: 15px;
+}
+
+.body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
 }

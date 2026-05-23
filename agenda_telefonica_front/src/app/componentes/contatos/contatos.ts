@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Contato, ServiceContatos } from '../../service-contatos';
 
 @Component({
   selector: 'app-contatos',
@@ -6,4 +8,63 @@ import { Component } from '@angular/core';
   templateUrl: './contatos.html',
   styleUrl: './contatos.scss',
 })
-export class Contatos {}
+export class Contatos implements OnInit{
+  constructor(private router: Router, private service: ServiceContatos) {}
+  
+  ngOnInit(): void {
+    this.carregarContatos()
+  }
+
+  contatos: Contato[] = []
+  zeroContatos: boolean = false
+  carregarContatos() {
+    this.service.obterContatos<any[]>().subscribe({
+      next: (resposta) => {
+        this.contatos = resposta
+      },
+      error: (erro) => {
+        console.error('Erro ao buscar dados:', erro)
+      }
+    });
+    if(this.contatos.length == 0){
+        //this.zeroContatos = true
+        //lembrar de descomentar
+    }
+  }
+
+  //Conjunto temporário
+  dados: Array<{ id: number, nome: string, telefone: string }> = [
+    { id: 1, nome: 'Aline', telefone: "5527999990000" },
+    { id: 2, nome: 'Karys', telefone: "5516999990000" },
+    { id: 3, nome: 'Pessoa3', telefone: "5521999990000" },
+    { id: 4, nome: 'Pessoa4', telefone: "5521999990000" },
+    { id: 5, nome: 'Pessoa5', telefone: "5521999990000" },
+    { id: 6, nome: 'Pessoa6', telefone: "5521999990000" }
+  ];
+
+  cadastrarContato(){
+    this.router.navigate(['/cadastrar'])
+  }
+
+  editarContato(id: number){
+    //passar id
+    this.router.navigate(['/editar'])
+  }
+
+  excluirContato(id: number) : void{
+    if (confirm('Tem certeza que deseja excluir este contato?')) {
+      this.service.apagarContato(id).subscribe({
+        next: () => {
+          console.log('Deletado com sucesso!');
+          this.carregarContatos()
+        },
+        error: (err) => console.error('Erro ao apagar contato:', err)
+      })
+    }
+  }
+
+  enviarWhatsApp(tel: any){
+    var url = "https://wa.me/"+tel
+    window.open(url, '_blank')
+  }
+}
