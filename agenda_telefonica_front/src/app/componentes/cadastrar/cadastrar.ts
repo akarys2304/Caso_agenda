@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-cadastrar',
@@ -6,4 +7,20 @@ import { Component } from '@angular/core';
   templateUrl: './cadastrar.html',
   styleUrl: './cadastrar.scss',
 })
-export class Cadastrar {}
+
+export class Cadastrar {
+  contatoForm = new FormGroup({
+    nome: new FormControl('', [Validators.required]),
+    telefone: new FormControl('', [
+      Validators.required, 
+      Validators.minLength(8),
+      Validators.maxLength(9)
+    ],
+      
+    )
+  });
+
+  onSubmit(){
+    console.warn(this.contatoForm.value.nome)
+  }
+}

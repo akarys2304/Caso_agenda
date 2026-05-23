@@ -1,1 +1,26 @@
-<p>editar works!</p>
+<h1>Você está editando seu contato!</h1>
+
+<form [formGroup]="editaContatoForm" (ngSubmit)="onSubmit()">
+    <label for="nome">Nome:</label>
+    <br>
+    <input type="text" formControlName="nome">
+    <br/>
+    <label for="telefone">Telefone:</label>
+    <br>
+    <input type="text" formControlName="telefone">
+
+    <br/><br/>
+    <button type="submit" [disabled]="!editaContatoForm.valid">Cadastrar</button>
+</form>
+
+<h3>Visualização do contato:</h3>
+<table border="1px">
+    <tr>
+        <th>Nome</th>
+        <th>Telefone</th>
+    </tr>
+    <tr>
+        <th>{{editaContatoForm.value.nome}}</th>
+        <th>{{editaContatoForm.value.telefone}}</th>
+    </tr>
+</table>
