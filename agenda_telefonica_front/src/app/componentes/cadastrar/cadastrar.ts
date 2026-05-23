@@ -13,8 +13,8 @@ export class Cadastrar {
     nome: new FormControl('', [Validators.required]),
     telefone: new FormControl('', [
       Validators.required, 
-      Validators.minLength(8),
-      Validators.maxLength(9)
+      Validators.minLength(13),
+      Validators.maxLength(13)
     ],
       
     )

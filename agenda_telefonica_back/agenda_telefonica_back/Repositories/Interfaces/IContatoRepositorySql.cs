@@ -15,7 +15,5 @@ namespace agenda_telefonica_back.Repositories.Interfaces
         Task<Contato> CriarAsync(Contato contato);
         Task<Contato> AtualizarAsync(Contato contato);
         Task<bool> DeletarAsync(int id);
-        Task<IEnumerable<Contato>> ObterPorNomeAsync(string nome);
-        Task<int> ObterTotalContatosAsync();
     }
 }

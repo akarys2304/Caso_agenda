@@ -2,23 +2,14 @@
 using agenda_telefonica_back.Repositories.Interfaces;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using Npgsql;
 
 namespace agenda_telefonica_back.Repositories
 {
     public class ContatoRepositorySql : IContatoRepositorySql
     {
-        private readonly string _connectionString;
+        private readonly string connString = "Host=localhost;Port=5432;Username=postgres;Password=12345678;Database=postgres";
 
-        public ContatoRepositorySql(IConfiguration configuration)
-        {
-            // Obtém a connection string do appsettings.json
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
-        }
-
-        /// <summary>
-        /// Obtém todos os contatos do banco de dados
-        /// Script SQL: SELECT simples
-        /// </summary>
         public async Task<IEnumerable<Contato>> ObterTodosAsync()
         {
             var contatos = new List<Contato>();
@@ -29,23 +20,23 @@ namespace agenda_telefonica_back.Repositories
                     id,
                     nome,
                     telefone
-                FROM Contatos
+                FROM ""Contatos""
                 ORDER BY nome ASC";
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                using (var connection = new NpgsqlConnection(connString))
                 {
                     await connection.OpenAsync();
 
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(sqlScript, connection))
                     {
                         // Define o tipo de comando como Text (script SQL)
                         command.CommandType = CommandType.Text;
                         // Define timeout de 30 segundos
                         command.CommandTimeout = 30;
 
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             while (await reader.ReadAsync())
                             {
@@ -62,7 +53,7 @@ namespace agenda_telefonica_back.Repositories
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
                 throw new Exception($"Erro ao buscar contatos do banco de dados: {ex.Message}", ex);
             }
@@ -87,18 +78,18 @@ namespace agenda_telefonica_back.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                 {
                     await connection.OpenAsync();
 
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(sqlScript, connection))
                     {
                         command.CommandType = CommandType.Text;
 
                         // Adiciona parâmetro para prevenir SQL Injection
                         command.Parameters.AddWithValue("@id", id);
 
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        using (NpgsqlDataReader reader = await command.ExecuteReaderAsync())
                         {
                             if (await reader.ReadAsync())
                             {
@@ -113,7 +104,7 @@ namespace agenda_telefonica_back.Repositories
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
                 throw new Exception($"Erro ao buscar contato com ID {id}: {ex.Message}", ex);
             }
@@ -139,11 +130,11 @@ namespace agenda_telefonica_back.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                 {
                     await connection.OpenAsync();
 
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(sqlScript, connection))
                     {
                         command.CommandType = CommandType.Text;
 
@@ -162,7 +153,7 @@ namespace agenda_telefonica_back.Repositories
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
                 throw new Exception($"Erro ao criar contato no banco de dados: {ex.Message}", ex);
             }
@@ -186,11 +177,11 @@ namespace agenda_telefonica_back.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                 {
                     await connection.OpenAsync();
 
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(sqlScript, connection))
                     {
                         command.CommandType = CommandType.Text;
 
@@ -209,7 +200,7 @@ namespace agenda_telefonica_back.Repositories
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
                 throw new Exception($"Erro ao atualizar contato com ID {contato.id}: {ex.Message}", ex);
             }
@@ -230,11 +221,11 @@ namespace agenda_telefonica_back.Repositories
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
+                using (NpgsqlConnection connection = new NpgsqlConnection(connString))
                 {
                     await connection.OpenAsync();
 
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
+                    using (NpgsqlCommand command = new NpgsqlCommand(sqlScript, connection))
                     {
                         command.CommandType = CommandType.Text;
 
@@ -246,104 +237,10 @@ namespace agenda_telefonica_back.Repositories
                     }
                 }
             }
-            catch (SqlException ex)
+            catch (NpgsqlException ex)
             {
                 throw new Exception($"Erro ao deletar contato com ID {id}: {ex.Message}", ex);
             }
-        }
-
-        /// <summary>
-        /// Busca contatos por faixa de preço
-        /// Script SQL: SELECT com WHERE complexo
-        /// </summary>
-        public async Task<IEnumerable<Contato>> ObterPorNomeAsync(string nome)
-        {
-            var contatos = new List<Contato>();
-
-            // Script SQL pré-definido com múltiplos parâmetros
-            string sqlScript = @"
-                SELECT 
-                    id,
-                    nome,
-                    telefone
-                FROM Contatos
-                WHERE nome = @nome
-                ORDER BY nome ASC";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    await connection.OpenAsync();
-
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
-                    {
-                        command.CommandType = CommandType.Text;
-
-                        command.Parameters.AddWithValue("@nome", nome);
-
-                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                        {
-                            while (await reader.ReadAsync())
-                            {
-                                var contato = new Contato
-                                {
-                                    id = reader.GetInt32(0),
-                                    nome = reader.GetString(1),
-                                    telefone = reader.GetString(2)
-                                };
-
-                                contatos.Add(contato);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw new Exception($"Erro ao buscar contatos por preço: {ex.Message}", ex);
-            }
-
-            return contatos;
-        }
-
-        /// <summary>
-        /// Obtém o total de contatos usando agregação
-        /// Script SQL: SELECT com COUNT
-        /// </summary>
-        public async Task<int> ObterTotalContatosAsync()
-        {
-            // Script SQL pré-definido com agregação
-            string sqlScript = @"
-                SELECT COUNT(*) AS Total
-                FROM Contatos";
-
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(_connectionString))
-                {
-                    await connection.OpenAsync();
-
-                    using (SqlCommand command = new SqlCommand(sqlScript, connection))
-                    {
-                        command.CommandType = CommandType.Text;
-
-                        // ExecuteScalar retorna um valor único
-                        var result = await command.ExecuteScalarAsync();
-
-                        if (result != null && int.TryParse(result.ToString(), out int total))
-                        {
-                            return total;
-                        }
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                throw new Exception($"Erro ao obter total de contatos: {ex.Message}", ex);
-            }
-
-            return 0;
         }
     }
 }
