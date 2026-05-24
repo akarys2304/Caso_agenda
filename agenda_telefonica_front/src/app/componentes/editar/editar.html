@@ -9,7 +9,7 @@
     <br/>
     <label for="telefone">Telefone:</label>
     <br>
-    <input type="text" formControlName="telefone">
+    <input type="text" id="campoTelefone" placeholder="+55 (11) 99999-9999" (input)="aplicarMascaraTelefone($event)" formControlName="telefone">
 
     <br/><br/>
     <button type="submit" [disabled]="!editaContatoForm.valid">Atualizar Contato</button>
@@ -23,6 +23,6 @@
     </tr>
     <tr>
         <th>{{editaContatoForm.value.nome}}</th>
-        <th>{{editaContatoForm.value.telefone}}</th>
+        <th>{{telefoneVisivel}}</th>
     </tr>
 </table>

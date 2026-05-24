@@ -32,15 +32,26 @@ export class Contatos implements OnInit{
     });
   }
 
-  //Conjunto temporário
-  dados: Array<{ id: number, nome: string, telefone: string }> = [
-    { id: 1, nome: 'Aline', telefone: "5527999990000" },
-    { id: 2, nome: 'Karys', telefone: "5516999990000" },
-    { id: 3, nome: 'Pessoa3', telefone: "5521999990000" },
-    { id: 4, nome: 'Pessoa4', telefone: "5521999990000" },
-    { id: 5, nome: 'Pessoa5', telefone: "5521999990000" },
-    { id: 6, nome: 'Pessoa6', telefone: "5521999990000" }
-  ];
+  formatarTexto(valor: string): string {
+    let textoFormatado = valor.replace(/\D/g, "");
+
+    if (textoFormatado.length > 0) {
+      textoFormatado = "+" + textoFormatado;
+    }
+    if (textoFormatado.length > 3) {
+      textoFormatado = textoFormatado.replace(/^\+(\d{2})(\d)/, "+$1 ($2");
+    }
+    if (textoFormatado.length > 7) {
+      textoFormatado = textoFormatado.replace(/^\+(\d{2}) \((\d{2})(\d)/, "+$1 ($2) $3");
+    }
+    if (textoFormatado.length > 11) {
+      textoFormatado = textoFormatado.replace(/(\d{4})(\d{4})$/, "$1-$2");
+    } else if (textoFormatado.length > 12) {
+      textoFormatado = textoFormatado.replace(/(\d{5})(\d{4})$/, "$1-$2");
+    }
+
+    return textoFormatado;
+  }
 
   cadastrarContato(){
     this.router.navigate(['/cadastrar'])
@@ -65,5 +76,9 @@ export class Contatos implements OnInit{
   enviarWhatsApp(tel: any){
     var url = "https://wa.me/"+tel
     window.open(url, '_blank')
+  }
+
+  voltarAoInicio(){
+    this.router.navigate(['/inicial'])
   }
 }

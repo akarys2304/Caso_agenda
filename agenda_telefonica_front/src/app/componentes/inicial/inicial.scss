@@ -1,17 +1,22 @@
+body{
+  font-family: Arial, sans-serif;
+}
+
+
 .titulo-centralizado {
     text-align: center;
     padding:  0px 25px;
     padding-bottom: 40px;
-
 }
 
 .entrar-button {
-    background-color: beige;
+    background-color: rgb(247, 243, 249);
     text-align: center;
     display: block;
     margin: 0 auto;
     padding: 15px 25px;
     font-size: 15px;
+    border: 2px solid rgb(210, 184, 222) ;
     border-radius: 15px;
     cursor: pointer;
 }
@@ -21,7 +26,7 @@
     margin: 0 auto;
     padding: 50px 20px;
     padding-bottom: 70px;
-    background-color: lightblue;
+    background-color: #c3e5f0;
     border-radius: 15px;
 }
 

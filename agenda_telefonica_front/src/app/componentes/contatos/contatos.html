@@ -14,7 +14,7 @@
             <tbody>
                 <tr *ngFor="let item of contatos">
                     <td>{{ item.nome }}</td>
-                    <td>{{ item.telefone }}</td>
+                    <td>{{ formatarTexto(item.telefone) }}</td>
                     <td>
                         <div class="acoes-container">
                             <button class="acoes-button" (click)="editarContato(item.id)">Editar</button>
@@ -29,7 +29,9 @@
             </tbody>
         </table>
         
-
+    <div class="botoes">
+        <button class="sair-contato-button" (click)="voltarAoInicio()">Voltar ao início</button>
         <button class="adicionar-contato-button" (click)="cadastrarContato()">Adicionar contato</button>
+    </div>
     </div>
 </body>

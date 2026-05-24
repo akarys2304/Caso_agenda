@@ -16,6 +16,10 @@ export class Editar implements OnInit{
 
   constructor(private router: Router, private service: ServiceContatos, private route: ActivatedRoute) {}
 
+  public telefoneLimpo: any;
+  public telefoneVisivel: string = "";
+
+  
   ngOnInit(): void {
     const idParam = this.route.snapshot.paramMap.get('id');
     if (idParam) {
@@ -25,9 +29,11 @@ export class Editar implements OnInit{
       this.service.obterContatoPorId(this.contatoId).subscribe({
         next: (resposta: any) =>{
           this.contato = resposta;
+          this.telefoneLimpo = resposta.telefone;
+          this.telefoneVisivel = this.formatarTexto(this.telefoneLimpo);
           this.editaContatoForm.patchValue({
             nome: resposta.nome,
-            telefone: resposta.telefone
+            telefone: this.telefoneVisivel
           })
         },
         error: (erro) => {
@@ -37,12 +43,42 @@ export class Editar implements OnInit{
     }
   }
 
+  public aplicarMascaraTelefone(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (!input) return;
+    this.telefoneLimpo = input.value.replace(/\D/g, "");
+    this.telefoneVisivel = this.formatarTexto(this.telefoneLimpo);
+    input.value = this.telefoneVisivel;
+  }
+
+  private formatarTexto(valor: string): string {
+    let textoFormatado = valor.replace(/\D/g, "");
+
+    if (textoFormatado.length > 0) {
+      textoFormatado = "+" + textoFormatado;
+    }
+    if (textoFormatado.length > 3) {
+      textoFormatado = textoFormatado.replace(/^\+(\d{2})(\d)/, "+$1 ($2");
+    }
+    if (textoFormatado.length > 7) {
+      textoFormatado = textoFormatado.replace(/^\+(\d{2}) \((\d{2})(\d)/, "+$1 ($2) $3");
+    }
+    if (textoFormatado.length > 11) {
+      textoFormatado = textoFormatado.replace(/(\d{4})(\d{4})$/, "$1-$2");
+    } else if (textoFormatado.length > 12) {
+      textoFormatado = textoFormatado.replace(/(\d{5})(\d{4})$/, "$1-$2");
+    }
+
+    return textoFormatado;
+  }
+
+
   editaContatoForm = new FormGroup({
     nome: new FormControl('', [Validators.required]),
     telefone: new FormControl('', [
       Validators.required, 
       Validators.minLength(13),
-      Validators.maxLength(14)
+      Validators.maxLength(19)
     ],
       
     )
@@ -51,6 +87,7 @@ export class Editar implements OnInit{
   onSubmit(){
     if (confirm('Tem certeza que deseja atualizar este contato?')) {
       console.warn(this.editaContatoForm.value);
+      this.editaContatoForm.value.telefone = this.telefoneLimpo;
       this.service.atualizarContato(this.contatoId, this.editaContatoForm.value).subscribe({
         next: (resposta) =>{
           console.log('Contato atualizado com sucesso!', resposta);
@@ -59,7 +96,7 @@ export class Editar implements OnInit{
           console.error('Erro ao atualizar contato:', erro);
         }
       });
-      this.voltarAoInicio();
+      // this.voltarAoInicio();
     }
   }
 

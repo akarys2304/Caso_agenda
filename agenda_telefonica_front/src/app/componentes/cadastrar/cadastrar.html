@@ -3,11 +3,11 @@
 <form [formGroup]="contatoForm" (ngSubmit)="onSubmit()">
     <label for="nome">Nome:</label>
     <br>
-    <input type="text" formControlName="nome">
+    <input type="text" formControlName="nome" placeholder="Ex: Fulano de Tal">
     <br/>
     <label for="telefone">Telefone:</label>
     <br>
-    <input type="text" formControlName="telefone">
+    <input type="text" id="campoTelefone" placeholder="+55 (11) 99999-9999" (input)="aplicarMascaraTelefone($event)" formControlName="telefone">
 
     <br/><br/>
     <button type="submit" [disabled]="!contatoForm.valid">Cadastrar</button>
@@ -21,6 +21,6 @@
     </tr>
     <tr>
         <th>{{contatoForm.value.nome}}</th>
-        <th>{{contatoForm.value.telefone}}</th>
+        <th>{{valor}}</th>
     </tr>
 </table>
