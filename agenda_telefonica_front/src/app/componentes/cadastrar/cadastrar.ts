@@ -70,4 +70,8 @@ export class Cadastrar {
     }
   }
 
+  voltarAosContatos(){
+    this.router.navigate(['/contatos'])
+  }
+
 }
