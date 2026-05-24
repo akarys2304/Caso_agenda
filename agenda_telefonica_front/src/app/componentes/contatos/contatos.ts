@@ -16,7 +16,7 @@ export class Contatos implements OnInit{
 
   // contatos: Contato[] = []
   contatos: any;
-  zeroContatos: boolean = false
+  zeroContatos: boolean = true;
   carregarContatos() {
     this.service.obterContatos().subscribe({
       next: (resposta: any) => {

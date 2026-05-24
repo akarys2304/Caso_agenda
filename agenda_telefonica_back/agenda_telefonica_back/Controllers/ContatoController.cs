@@ -2,6 +2,7 @@ using agenda_telefonica_back.Models;
 using agenda_telefonica_back.Models.DTOs;
 using agenda_telefonica_back.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace agenda_telefonica_back.Controllers
 {

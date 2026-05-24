@@ -16,7 +16,7 @@ namespace agenda_telefonica_back.Repositories
 
         public async Task<IEnumerable<Contato>> ObterTodosAsync()
         {
-            return await _context.Contatos.ToListAsync();
+            return await _context.Contatos.OrderBy(c => c.nome).ToListAsync();
         }
 
         public async Task<Contato> ObterPorIdAsync(int id)

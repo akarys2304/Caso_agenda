@@ -18,7 +18,7 @@ export class Cadastrar {
     telefone: new FormControl('', [
       Validators.required, 
       Validators.minLength(13),
-      Validators.maxLength(13)
+      Validators.maxLength(14)
     ],
       
     )

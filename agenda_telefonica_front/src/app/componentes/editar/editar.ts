@@ -49,15 +49,18 @@ export class Editar implements OnInit{
   });
 
   onSubmit(){
-    console.warn(this.editaContatoForm.value);
-    this.service.atualizarContato(this.contatoId, this.editaContatoForm.value).subscribe({
-      next: (resposta) =>{
-        console.log('Contato atualizado com sucesso!', resposta);
-      },
-      error: (erro) =>{
-         console.error('Erro ao atualizar contato:', erro);
-      }
-    });
+    if (confirm('Tem certeza que deseja atualizar este contato?')) {
+      console.warn(this.editaContatoForm.value);
+      this.service.atualizarContato(this.contatoId, this.editaContatoForm.value).subscribe({
+        next: (resposta) =>{
+          console.log('Contato atualizado com sucesso!', resposta);
+        },
+        error: (erro) =>{
+          console.error('Erro ao atualizar contato:', erro);
+        }
+      });
+      this.voltarAoInicio();
+    }
   }
 
   voltarAoInicio(){
