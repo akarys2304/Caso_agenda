@@ -11,8 +11,7 @@ import { Contato, ServiceContatos } from '../../service-contatos';
 export class Contatos implements OnInit{
   constructor(private router: Router, private service: ServiceContatos, private cdRef: ChangeDetectorRef ) {}
   ngOnInit(): void {
-    this.carregarContatos()
-    console.log("Passou aqui no ngOnInit")
+    this.carregarContatos();
   }
 
   // contatos: Contato[] = []
@@ -48,8 +47,7 @@ export class Contatos implements OnInit{
   }
 
   editarContato(id: number){
-    //passar id
-    this.router.navigate(['/editar'])
+    this.router.navigate(['/editar', id]); 
   }
 
   excluirContato(id: number) : void{

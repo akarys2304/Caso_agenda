@@ -1,19 +1,21 @@
+<button (click)="voltarAoInicio()">Voltar</button>
 <h1>Você está editando seu contato!</h1>
 
+<!-- Formulário reativo -->
 <form [formGroup]="editaContatoForm" (ngSubmit)="onSubmit()">
     <label for="nome">Nome:</label>
     <br>
-    <input type="text" formControlName="nome">
+    <input type="text" name="nome" formControlName="nome">
     <br/>
     <label for="telefone">Telefone:</label>
     <br>
     <input type="text" formControlName="telefone">
 
     <br/><br/>
-    <button type="submit" [disabled]="!editaContatoForm.valid">Cadastrar</button>
+    <button type="submit" [disabled]="!editaContatoForm.valid">Atualizar Contato</button>
 </form>
 
-<h3>Visualização do contato:</h3>
+<h3>Visualização do contato a:</h3>
 <table border="1px">
     <tr>
         <th>Nome</th>
