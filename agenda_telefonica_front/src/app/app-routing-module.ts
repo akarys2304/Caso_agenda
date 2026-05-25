@@ -8,7 +8,7 @@ import { Cadastrar } from './componentes/cadastrar/cadastrar';
 export const routes: Routes = [
   {path: 'inicial', component: Inicial},
   {path: 'contatos', component: Contatos},
-  {path: 'editar', component: Editar},
+  {path: 'editar/:id', component: Editar},
   {path: 'cadastrar', component: Cadastrar},
   { path: '', redirectTo: 'inicial', pathMatch: 'full' }
 ];

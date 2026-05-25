@@ -1,1 +1,31 @@
-<p>cadastrar works!</p>
+<body>
+    <div class="container">
+        <button class="voltar" (click)="voltarAosContatos()">↩</button>
+        <h1>Adicionar novo contato</h1>
+        
+        <form [formGroup]="contatoForm" (ngSubmit)="onSubmit()">
+            <label for="nome">Nome:</label>
+            <br>
+            <input type="text" formControlName="nome" placeholder="Ex: Fulano de Tal">
+            <br/>
+            <label for="telefone">Telefone:</label>
+            <br>
+            <input type="text" id="campoTelefone" placeholder="+55 (11) 99999-9999" (input)="aplicarMascaraTelefone($event)" formControlName="telefone">
+            
+            <br/><br/>
+            <button class="cadastrarbtn" type="submit" [disabled]="!contatoForm.valid">Cadastrar</button>
+        </form>
+        
+        <p>Visualização do contato</p>
+        <table border="1px">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr>
+                <td>{{contatoForm.value.nome}}</td>
+                <td>{{valor}}</td>
+            </tr>
+        </table>                                                                                                    
+    </div>
+</body>

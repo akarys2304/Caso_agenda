@@ -1,0 +1,96 @@
+.body {
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.botoes{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.adicionar-contato-button {
+    background-color: rgb(220, 235, 245);
+    text-align: center;
+    display: block;
+    margin: 0 20px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border: 2px solid rgb(153, 197, 226) ;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.sair-contato-button {
+    background-color: rgb(230, 208, 241);
+    text-align: center;
+    display: block;
+    margin: 0 20px;
+    padding: 5px 5px;
+    font-size: 15px;
+    border: 2px solid rgb(175, 137, 192) ;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.acoes-button {
+    background-color: rgb(242, 226, 243);
+    text-align: center;
+    display: block;
+    padding: 3px 5px;
+    font-size: 12px;
+    border: 1px solid rgb(210, 173, 212);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.agenda-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    padding-bottom: 70px;
+    background-color: white;
+    border-radius: 15px;
+    justify-content: center;
+    display: flex;
+    align-items: flex-start; /* Alinha o topo da tabela e o topo do botão na mesma reta */
+    gap: 20px;               /* Dá um espaçamento horizontal entre a tabela e o botão */
+    width: 100%;
+}
+
+.acoes-container {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo-centralizado {
+    text-align: center;
+    padding:  0px 25px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}

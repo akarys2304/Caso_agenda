@@ -1,1 +1,32 @@
-<p>editar works!</p>
+<body>
+    <div class="container">
+        <button class="voltar" (click)="voltarAoInicio()">↩</button>
+        <h1>Editar contato</h1>
+    
+        <!-- Formulário reativo -->
+        <form [formGroup]="editaContatoForm" (ngSubmit)="onSubmit()">
+            <label for="nome">Nome:</label>
+            <br>
+            <input type="text" name="nome" formControlName="nome">
+            <br/>
+            <label for="telefone">Telefone:</label>
+            <br>
+            <input type="text" id="campoTelefone" placeholder="+55 (11) 99999-9999" (input)="aplicarMascaraTelefone($event)" formControlName="telefone">
+            
+            <br/><br/>
+            <button class="cadastrarbtn" type="submit" [disabled]="!editaContatoForm.valid">Atualizar Contato</button>
+        </form>
+
+        <h3>Visualização do contato a:</h3>
+        <table border="1px">
+            <tr>
+                <th>Nome</th>
+                <th>Telefone</th>
+            </tr>
+            <tr>
+                <td>{{editaContatoForm.value.nome}}</td>
+                <td>{{telefoneVisivel}}</td>
+            </tr>
+        </table>
+    </div>
+</body>
